@@ -17,7 +17,6 @@ void setup()
   pinMode(5, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(6, OUTPUT);
-  pinMode(8,INPUT);//PIR 
 
   SPI.begin();
   rfid.init();
@@ -52,13 +51,12 @@ void loop() {
   }
 
   //RFID
-  if (count != 4)
-  {
+  
 //    Serial.println(count);
     if (rfid.isCard()) {
       if (rfid.readCardSerial()) {
         rfidCard = String(rfid.serNum[0]) + " " + String(rfid.serNum[1]) + " " + String(rfid.serNum[2]) + " " + String(rfid.serNum[3]);
-        //Serial.println(rfidCard);
+        Serial.println(rfidCard);
         if (rfidCard == "25 55 115 229")
         {
           noTone(A5);
@@ -72,119 +70,9 @@ void loop() {
           delay(1000);
           digitalWrite(5, LOW);
         }
-        else
-        {
-          if (count == 0)
-          {
-            digitalWrite(6, HIGH);
-            delay(1000);
-            tone(A5, 10);
-            delay(1000);
-            noTone(A5);
-            count++;
-            digitalWrite(6, LOW);
-
-          }
-          else if (count == 1)
-          {
-            digitalWrite(6, HIGH);
-            delay(800);
-            tone(A5, 10);
-            delay(800);
-            noTone(A5);
-
-            delay(800);
-            tone(A5, 10);
-            delay(800);
-            noTone(A5);
-            count++;
-            digitalWrite(6, LOW);
-          }
-
-          else if (count == 2)
-          {
-            digitalWrite(6, HIGH);
-            delay(600);
-            tone(A5, 10);
-            delay(600);
-            noTone(A5);
-
-            delay(600);
-            tone(A5, 10);
-            delay(600);
-            noTone(A5);
-
-            delay(600);
-            tone(A5, 10);
-            delay(600);
-            noTone(A5);
-            count++;
-             digitalWrite(6, LOW);
-          }
-
-          else if (count == 3)
-          {
-             digitalWrite(6, HIGH);
-            delay(400);
-            tone(A5, 10);
-            delay(400);
-            noTone(A5);
-
-            delay(400);
-            tone(A5, 10);
-            delay(400);
-            noTone(A5);
-
-            delay(400);
-            tone(A5, 10);
-            delay(400);
-            noTone(A5);
-
-            delay(400);
-            tone(A5, 10);
-            delay(400);
-            count++;
-          }
-        }
       }
       rfid.halt();
     }
-  }
-  else
-  {
-    ct = millis();
-    if ((ct - pt) >= 1000)
-    {
-      S++;
-      pt = ct;
-      Serial.println(S);
-
-      if (S >= 10)
-      {
-        noTone(A5);
-        count = 0;
-        S = 0;
-        RFID_STATUS = false;
-         digitalWrite(6, LOW);
-      }
-    }
-  }
-  // PIR
-  if(RFID_STATUS!=true)
-  {
-    if(digitalRead(8)==HIGH)
-    {
-      tone(A5, 10);
-      digitalWrite(6,HIGH);
-      delay(100);
-    }
-     else
-    {
-      noTone(A5);
-      digitalWrite(6,LOW);
-    }
-    delay(100);
-  }
   
 
 

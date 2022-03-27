@@ -59,7 +59,7 @@ void setup()
   digitalWrite(WY, HIGH); //y
   digitalWrite(WG, HIGH); //R
 
-//  delay_();
+  delay(3000);
 
   //  NORTH
   digitalWrite(NR, LOW); //R
@@ -87,7 +87,7 @@ void loop()
   Signal();
 //Serial.println(digitalRead(A0));//W
 //Serial.println(digitalRead(A1));//N
-Serial.println(digitalRead(A2));//E
+//Serial.println(digitalRead(A2));//E
 //Serial.println(digitalRead(A3));//S
 //delay(5000);
   
